@@ -1,0 +1,138 @@
+@import './_mixins'
+@import './_variables'
+%background_props
+    background-repeat: no-repeat
+    background-size: contain
+    background-position: center
+.main
+    @include flex_box($direction:column )
+    width: 100%
+.form_container
+    position: relative
+.tasksNav_container
+    z-index: 10
+    border-radius: 5px
+    box-shadow: 0 30px 50px #0000000c
+    max-height: 600px
+    overflow: auto
+    & :first-child
+        border-radius: 5px 5px 0 0
+
+.main_child
+    @include flex_box($justify:space-between)
+    width: 100%
+    padding: 20px
+    background-color: #fff
+    border-bottom: 1px solid $veryLightGrayishBlue
+    .task_title
+        @include flex_box()
+        align-items: center
+        color: $veryDarkDesaturatedBlue
+        .title
+            white-space: pre-wrap
+            word-break: break-all
+        .title.active
+            text-decoration: line-through
+            text-decoration-skip-ink: auto
+            color: $veryLightGrayishBlue
+.newtask
+    position: relative
+    z-index: 10
+    justify-content: flex-start
+    margin-bottom: 20px
+    border-radius: 5px
+    border: none !important
+    input
+        background-color: transparent
+        width: 100%
+        border: none
+        outline: none
+        caret-color: $brightBlue
+.check, .border_gradient, .title_check
+    display: flex
+    cursor: pointer
+    min-width: 24px
+    min-height: 24px
+    border-radius: 50% !important
+    border: 1px solid $veryLightGrayishBlue
+    margin-right: 20px
+    background-color: transparent
+
+.check
+    z-index: 10
+    background-color: #fff
+    align-self: center
+
+.border_gradient
+    padding-left: 1px
+    border: none
+    width: 26px
+    height: 26px
+    transition: background-image 0.5s
+.border_gradient:hover
+    background-image: $checkBackground
+
+.check.active
+    @include flex_box()
+    align-items: center
+    border: none
+    background-image: $checkBackground
+    @extend %background_props
+    span
+        width: 12px
+        height: 12px
+        background-image: url(../images/icon-check.svg)
+        @extend %background_props
+
+.delete
+    width: 18px
+    min-width: 18px
+    height: 18px
+    align-self: center
+    cursor: pointer
+    background-image: url(../images/icon-cross.svg)
+    @extend %background_props
+    animation: showDelete .3s
+
+//Dark Mode
+.main.dark
+    .tasksNav_container
+        box-shadow: 0 30px 50px #000000
+    .main_child
+        background-color: $veryDarkDesaturatedBlue
+        border-bottom: 1px solid $veryDarkGrayishBlueDark1
+        .task_title
+            color: $lightGrayishBlue1
+            .title.active
+                color: $darkGrayishBlueDark
+    .newtask
+        input
+            color: $lightGrayishBlue1
+    .check, .border_gradient, .title_check
+        border: 1px solid $veryDarkGrayishBlueDark1
+    .check
+        background-color: $veryDarkDesaturatedBlue
+    .border_gradient
+        border: none
+
+@include breakpoint()
+    .tasksNav_container
+        max-height: 450px
+    .check, .border_gradient, .title_check
+        min-width: 22px
+        min-height: 22px
+        margin-right: 15px
+    .border_gradient
+        padding-left: 1px
+        width: 24px
+        height: 24px
+    .delete
+        width: 15px
+        min-width: 15px
+        height: 15px
+
+@keyframes showDelete
+    0%
+        transform: scale(0)
+    100%
+        transform: scale(1)

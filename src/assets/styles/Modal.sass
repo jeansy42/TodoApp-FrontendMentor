@@ -1,0 +1,23 @@
+@import ./_mixins
+@import ./_variables
+.modal
+    position: absolute
+    z-index: 0
+    @include flex_box($justify:flex-start, $wrap:wrap )
+    color: #e02727
+    background-color: #fff
+    width: 100%
+    padding: 20px 64px
+    animation: showModal .5s forwards
+.modal.dark
+    background-color: $veryDarkDesaturatedBlue
+
+@include breakpoint()
+    .modal
+        padding: 20px 58px
+
+@keyframes showModal
+    0%
+        top: 0px
+    100%
+        top: 53%

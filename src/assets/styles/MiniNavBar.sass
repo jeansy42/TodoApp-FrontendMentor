@@ -1,0 +1,78 @@
+@import ./_mixins
+@import ./_variables
+.mini_navbar
+    @include flex_box($justify:space-between)
+    padding: 20px
+    position: sticky
+    background-color: #fff
+    z-index: 20
+    bottom: 0
+    .nav_child_one
+        width: 100%
+        display: flex
+        justify-content: space-between
+        & :first-child
+            align-self: center
+            min-width: 90px
+        span
+            align-self: center
+            font-size: 14px
+            color: $darkGrayishBlue
+        & :last-child
+            transition: color .3s
+        & :last-child:hover
+            color: $veryDarkDesaturatedBlue
+    .nav_child_two
+        position: absolute
+        left: 30%
+        bottom: 17px
+        span
+            color: $darkGrayishBlue
+            font-size: 14px
+            margin-right: 20px
+            font-weight: 700
+            transition: color .3s
+        span:hover
+            color: $veryDarkBlue
+            transition: .3s
+        .nav_btn.active
+            color: $brightBlue
+.nav_btn
+    cursor: pointer
+//Dark Mode
+.mini_navbar.dark
+    background-color: $veryDarkDesaturatedBlue
+    .nav_child_one
+        & :last-child:hover
+            color: #fff
+    .nav_child_two
+        .nav_btn.active
+            color: $brightBlue
+        span:hover
+            color: #fff
+    .nav_btn.active
+        color: $brightBlue
+
+@include breakpoint()
+    .mini_navbar
+        background-color: $veryLightGray
+        padding: 0
+        flex-direction: column
+        div
+            background-color: #fff
+            padding: 20px
+        .nav_child_one
+            @include flex_box( $justify: space-between )
+            margin-bottom: 20px
+            box-shadow: 0 30px 50px #0000000c
+        .nav_child_two
+            @include flex_box()
+            position: static
+            span
+                font-size: 16px
+    .mini_navbar.dark
+        background-color: $veryDarkBlue
+        div
+            background-color: $veryDarkDesaturatedBlue
+        .nav_child_one
+            box-shadow: 0 30px 50px #000000

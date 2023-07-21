@@ -1,0 +1,23 @@
+@import ./_mixins
+.header
+    @include flex_box($justify:space-between)
+    width: 100%
+    color: #fff
+    letter-spacing: 14px
+    margin-bottom: 30px
+    h1
+        font-weight: 700
+        font-size: 38px
+
+.toggle
+    display: flex
+    background-image: url(../images/icon-moon.svg)
+    background-repeat: no-repeat
+    background-size: cover
+    cursor: pointer
+    width: 24px
+    height: 24px
+
+.header.dark
+    .toggle
+        background-image: url(../images/icon-sun.svg)
