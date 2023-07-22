@@ -1,4 +1,10 @@
-import { createContext, useContext, useReducer, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import TaskReducer from "./TaskReducer";
 export const TaskContext = createContext();
 
@@ -17,9 +23,17 @@ export const useTaskContext = () => {
 export function GlobalProvider({ children }) {
   const [message, setMessage] = useState("");
   const [itemsLeft, setiItemsLeft] = useState(0);
-  const [toggle, setToggle] = useState(false);
   const [completedTasks, setCompletedTasks] = useState("");
   const [uncompletedTasks, setUncompletedTasks] = useState("");
+
+  const [toggle, setToggle] = useState(() => {
+    if (localStorage.getItem("toggle")) return localStorage.getItem("toggle");
+    else return false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("toggle", toggle);
+  }, [toggle]);
 
   const [tasks, dispatch] = useReducer(TaskReducer, initialTasks);
   const [activeTasks, setActiveTasks] = useState(tasks);
